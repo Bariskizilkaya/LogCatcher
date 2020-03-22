@@ -22,7 +22,7 @@ public class Controller {
     @RequestMapping(value = "/asd", method = RequestMethod.POST)
     public String nodeMcu(@RequestBody String data) {
         System.out.println("Data is : " + data);
-        sendData("GeldiGittiCnm", data,"json");
+        //sendData("GeldiGittiCnm", data,"json");
         return "Cevap";
     }
 
