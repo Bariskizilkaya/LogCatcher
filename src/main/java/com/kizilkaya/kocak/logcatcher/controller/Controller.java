@@ -1,8 +1,10 @@
-package com.kocakgiller.ss.controller;
+package com.kizilkaya.kocak.logcatcher.controller;
 
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -48,12 +50,13 @@ public class Controller {
             conn.setRequestProperty("charset", "utf-8");
             conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
             conn.setUseCaches(false);
-        } catch (Exception e) {
+            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+            wr.write(postData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
-            wr.write(postData);
-        }
     }
 
 }

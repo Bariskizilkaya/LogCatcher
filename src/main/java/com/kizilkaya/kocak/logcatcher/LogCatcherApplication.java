@@ -1,13 +1,13 @@
-package com.kocakgiller.ss;
+package com.kizilkaya.kocak.logcatcher;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SsApplication {
+public class LogCatcherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SsApplication.class, args);
+		SpringApplication.run(LogCatcherApplication.class, args);
 	}
 
 }
