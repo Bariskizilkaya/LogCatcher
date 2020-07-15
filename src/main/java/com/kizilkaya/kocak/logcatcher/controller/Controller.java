@@ -8,6 +8,11 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kizilkaya.kocak.logcatcher.utils.JWTUtil;
+import com.kizilkaya.kocak.logcatcher.utils.models.JWTJsonModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
+
+    @Autowired
+    JWTUtil jwtUtil;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String service() {
@@ -32,6 +40,25 @@ public class Controller {
     public String registerMcu(@RequestBody String id) {
         System.out.println("Registered hardware id : " + id);
         return "Cevap";
+    }
+
+    @RequestMapping(value="/generateJWT", method= RequestMethod.GET)
+    public String generate(){
+        String response ="Error:123";
+         try {
+             response= createToken();
+        } catch (Exception e){}
+
+        return response;
+    }
+
+    private String createToken() throws JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        JWTJsonModel jwtJsonModel = new JWTJsonModel(jwtUtil.generateJWT(),"HelloWorld","Cabbar");
+
+        return objectMapper.writeValueAsString(jwtJsonModel);
     }
 
     public void sendData(String data, String ip, String endpoint) {

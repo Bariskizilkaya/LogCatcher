@@ -1,5 +1,7 @@
 package com.kizilkaya.kocak.logcatcher.utils;
 
+import org.springframework.stereotype.Service;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+@Service
 public class JWTUtil {
     private static final String SECRET_KEY = "kizilkaya";
 
